@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>viewbox-ext — Settings</title>
+  <style>
+    body { font: 14px system-ui, sans-serif; max-width: 520px; margin: 32px auto; padding: 0 16px; color: #222; }
+    fieldset { border: 1px solid #ccc; border-radius: 6px; margin: 0 0 16px; }
+    label { display: block; margin: 10px 0 4px; font-weight: 600; }
+    input { width: 100%; box-sizing: border-box; padding: 6px; }
+    .row { display: flex; gap: 6px; }
+    .row input { flex: 1; }
+    button { padding: 6px 12px; cursor: pointer; }
+    #status { min-height: 1.4em; margin: 8px 0; }
+    small { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>viewbox-ext</h1>
+  <fieldset>
+    <legend>Sites</legend>
+    <small>The extension only runs on the sites you add here.</small>
+    <ul id="sites"></ul>
+    <form id="addSite" class="row">
+      <input id="site" placeholder="example.com" aria-label="Site address" autocomplete="off" spellcheck="false" required>
+      <button>Add site</button>
+    </form>
+  </fieldset>
+  <form id="form">
+    <fieldset>
+      <legend>TMDB</legend>
+      <label for="tmdbKey">API key (v3 key or v4 read token)</label>
+      <div class="row">
+        <input id="tmdbKey" autocomplete="off" spellcheck="false">
+        <button type="button" id="test">Test</button>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Site account (VIP)</legend>
+      <label for="vipEmail">Email</label>
+      <input id="vipEmail" type="email" autocomplete="off">
+      <label for="vipPassword">Password</label>
+      <div class="row">
+        <input id="vipPassword" type="password" autocomplete="new-password">
+        <button type="button" id="reveal" aria-pressed="false">Show</button>
+      </div>
+      <label for="syncCode">Sync Code</label>
+      <input id="syncCode" placeholder="XXXX-XXXX-X" pattern="[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]" autocomplete="off">
+      <small>Stored on this computer only (not synced to your Google account), unencrypted.</small>
+    </fieldset>
+    <fieldset>
+      <legend>New episodes</legend>
+      <label for="scanHours">Scan every (hours)</label>
+      <input id="scanHours" type="number" min="1" max="24" step="1" required>
+      <label><input id="notify" type="checkbox" style="width:auto"> Desktop notification when a show has new episodes</label>
+    </fieldset>
+    <fieldset>
+      <legend>Autoplay</legend>
+      <label><input id="autoplayEnabled" type="checkbox" style="width:auto"> Play the next episode automatically</label>
+      <label for="creditsOffset">Show "Next episode" this many seconds before the end</label>
+      <input id="creditsOffset" type="number" min="5" max="120" step="1" required>
+      <label for="countdownSecs">Countdown (seconds)</label>
+      <input id="countdownSecs" type="number" min="3" max="30" step="1" required>
+      <small>Turn autoplay off for a single show from the toolbar popup.</small>
+    </fieldset>
+    <fieldset>
+      <legend>"Are you still watching?"</legend>
+      <label><input id="stillWatching" type="checkbox" style="width:auto"> Ask before continuing when nobody has touched the player</label>
+      <label for="swEpisodes">…after this many episodes in a row</label>
+      <input id="swEpisodes" type="number" min="2" max="5" step="1" required>
+      <label for="swMinutes">…or after this many minutes</label>
+      <input id="swMinutes" type="number" min="60" max="180" step="5" required>
+    </fieldset>
+    <fieldset>
+      <legend>TV interface</legend>
+      <label><input id="tvUi" type="checkbox" style="width:auto"> Use the viewbox-ext TV interface on the site (sidebar, hero, TV screens)</label>
+      <small>Applies right away; open site tabs reload. Arrow keys move, Enter selects, Esc goes back.</small>
+    </fieldset>
+    <button type="submit">Save</button>
+    <button type="button" id="clear">Clear credentials</button>
+  </form>
+  <p id="status" role="status"></p>
+  <p><small>This product uses the TMDB API but is not endorsed or certified by TMDB.</small></p>
+  <script type="module" src="options.js"></script>
+</body>
+</html>
